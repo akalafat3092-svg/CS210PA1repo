@@ -5,11 +5,12 @@
 template <typename T>
 class LinkedList : public List<T> {
 public:
-    LinkedList() : head_(nullptr) {}
+    LinkedList() : head_(nullptr), size_(0){}
     void addFront(T* value) override {
         Node<T>* fresh = new Node<T>(value);
         fresh->next = head_;
         head_ = fresh;
+        ++size_;
     }
     void deleteFront() override {
         if (head_ == nullptr) {
@@ -20,6 +21,7 @@ public:
         head_ = head_->next;
         delete doomed->data;
         delete doomed;
+        --size_;
     }
     bool search(T* value) const override {
         Node<T>* current = head_;
@@ -37,6 +39,27 @@ public:
         }
         std::cout << std::endl;
     }
+    void addAnywhere(int position, T* value) override {
+        if (position < 0 || position > size_) {
+            std::cout << "Position out of bounds." << std::endl;
+            return;
+        }
+        else if (position == 0) {
+            addFront(value);
+            return;
+        }
+        else {
+            Node<T>* fresh = new Node<T>(value);
+            Node<T>* current = head_;
+            for (int i = 0; i < position - 1; ++i) {
+                current = current->next;
+            }
+            fresh->next = current->next;
+            current->next = fresh;
+            ++size_;
+        }
+
+    }
     ~LinkedList() override {
         while (head_ != nullptr) {
             Node<T>* doomed = head_;
@@ -47,4 +70,5 @@ public:
     }
 private:
     Node<T>* head_;
+    int size_;
 };
