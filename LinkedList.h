@@ -44,10 +44,6 @@ public:
             std::cout << "Position out of bounds." << std::endl;
             return;
         }
-        else if (position == 0) {
-            addFront(value);
-            return;
-        }
         else {
             Node<T>* fresh = new Node<T>(value);
             Node<T>* current = head_;
@@ -59,6 +55,28 @@ public:
             ++size_;
         }
 
+    }
+    void deleteAnywhere(int position) override {
+        if (position < 0 || position >= size_) {
+            std::cout << "Position out of bounds." << std::endl;
+            return;
+        }
+        else {
+            Node<T>* current = head_;
+            if (position == 0) {
+                deleteFront();
+                return;
+            }
+            for (int i = 0; i <position - 1; ++i) {
+                current = current->next;
+            }
+            Node<T>* doomed = current->next;
+            Node<T>* substitute = current->next->next;
+            delete doomed->data;
+            delete doomed;
+            current->next = substitute;
+            --size_;
+        }
     }
     ~LinkedList() override {
         while (head_ != nullptr) {

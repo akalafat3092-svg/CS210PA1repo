@@ -22,7 +22,7 @@ public:
             return;
         }
         delete data_[0];
-        for (int i = 0; i < size_ - 1; ++i) {
+        for (int i = 0; i < size_ - 1; i++) {
             data_[i] = data_[i + 1];
         }
         --size_;
@@ -34,7 +34,7 @@ public:
         return false;
     }
     void print() const override {
-        for (int i = 0; i < size_; ++i) {
+        for (int i = 0; i < size_; i++) {
             std::cout << *data_[i] << ",";
         }
         std::cout << std::endl;
@@ -42,10 +42,6 @@ public:
     void addAnywhere(int position, T* value) override {
         if (position < 0 || position > size_) {
             std::cout << "Position out of bounds." << std::endl;
-            return;
-        }
-        else if (position == 0) {
-            addFront(value);
             return;
         }
         else {
@@ -60,6 +56,23 @@ public:
             ++size_;
         }
 
+    }
+    void deleteAnywhere(int position) override {
+        if (position < 0 || position >= size_) {
+            std::cout << "Position out of bounds." << std::endl;
+            return;
+        }
+        else {
+            if (size_ == 0) {
+                std::cout << "ArrayList is empty." << std::endl;
+                return;
+            }
+            delete data_[position];
+            for (int i = position; i < size_ - 1; i++) {
+                data_[i] = data_[i + 1];
+            }
+            --size_;
+        }
     }
     ~ArrayList() override {
         for (int i = 0; i < size_; ++i) {
