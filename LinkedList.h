@@ -78,6 +78,18 @@ public:
             --size_;
         }
     }
+    void reverse() override {
+        Node<T>* current = head_;
+        Node<T>* predecessor = nullptr;
+        Node<T>* successor;
+        while (current != nullptr) {
+            successor = current->next;
+            current->next = predecessor;
+            predecessor = current;
+            current = successor;
+        }
+        head_ = predecessor;
+    }
     ~LinkedList() override {
         while (head_ != nullptr) {
             Node<T>* doomed = head_;

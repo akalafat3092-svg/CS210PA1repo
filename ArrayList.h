@@ -74,6 +74,13 @@ public:
             --size_;
         }
     }
+    void reverse() override {
+        for (int i = 0; i < size_/2; i++) {
+            T* sub = data_[i];
+            data_[i] = data_[size_ - 1 - i];
+            data_[size_ - 1 - i] = sub;
+        }
+    }
     ~ArrayList() override {
         for (int i = 0; i < size_; ++i) {
             delete data_[i];
