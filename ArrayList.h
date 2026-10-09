@@ -81,6 +81,28 @@ public:
             data_[size_ - 1 - i] = sub;
         }
     }
+    void concat(List<T>* other) override {
+        ArrayList<T>* otherArray = dynamic_cast<ArrayList<T>*>(other);
+        if (otherArray == nullptr) {
+            std::cout << "Incompatible List." << std::endl;
+            return;
+        }
+        else {
+            if (otherArray->size_ + size_ > CAPACITY) {
+                std::cout << "ArrayList is full." << std::endl;
+                return;
+            }
+            else {
+                int fixedOther = otherArray->size_;
+                for (int i = 0; i < fixedOther; i++) {
+                    data_[size_ + i] = otherArray->data_[i];
+                    otherArray->data_[i] = nullptr;
+                }
+                size_ += fixedOther;
+                otherArray->size_ = 0;
+            }
+        }
+    }
     ~ArrayList() override {
         for (int i = 0; i < size_; ++i) {
             delete data_[i];
