@@ -28,7 +28,32 @@ int main() {
     more->print();
 
     // ---- Part 2: your Uno scene goes below ----
-
+    std::unique_ptr<List<Player>> tableList = makeList<Player>();
+    std::cout << "New Table Scene:" << std::endl;
+    tableList->addFront(new Player(0, "Ike"));
+    tableList->addFront(new Player(1, "Aykan"));
+    tableList->addFront(new Player(2, "Icon"));
+    tableList->addFront(new Player(3, "Enner"));
+    tableList->print();
+    std::cout << "New Player Joins aka addAnywhere(2):"<< std::endl;
+    tableList->addAnywhere(2, new Player(4, "Jilio"));
+    tableList->print();
+    std::cout << "Someone plays the reverse card aka reverse():"<< std::endl;
+    tableList->reverse();
+    tableList->print();
+    std::cout << "Someone Leaves the Table aka deleteAnywhere(1):"<< std::endl;
+    tableList->deleteAnywhere(1);
+    tableList->print();
+    std::unique_ptr<List<Player>> otherTable = makeList<Player>();
+    std::cout << "Other Table:"<< std::endl;
+    otherTable->addFront(new Player(5, "Acorn"));
+    otherTable->addFront(new Player(6, "Acorniston"));
+    otherTable->addFront(new Player(7, "Ican"));
+    otherTable->print();
+    std::cout << "Other Table Joins Original aka concat():"<< std::endl;
+    tableList->concat(otherTable.get());
+    tableList->print();
+    otherTable->print();
 
     return 0;
 }
