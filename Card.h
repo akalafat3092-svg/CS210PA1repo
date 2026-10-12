@@ -1,0 +1,20 @@
+#pragma once
+#include <ostream>
+#include <string>
+
+class Card {
+public:
+    Card(std::string& color, const std::string& rank)
+        : color_(color), rank_(rank) {}
+
+    bool operator==(const Card& other) const {
+        return rank_ == other.rank_ && color_ == other.color_;
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const Card& c) {
+        return out << c.color_ << " " << c.rank_;
+    }
+private:
+    std::string color_;
+    std::string rank_;
+};

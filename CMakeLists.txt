@@ -10,4 +10,7 @@ add_executable(CS210UnoHW main.cpp
         LinkedList.h
         List.h
         Player.h
-        Stack.h)
+        Stack.h
+        Card.h
+
+)
