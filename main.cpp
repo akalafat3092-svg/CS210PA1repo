@@ -28,7 +28,9 @@ int main() {
     more->print();
 
     // ---- Part 2: your Uno scene goes below ----
-    std::unique_ptr<List<Player>> tableList = makeList<Player>();
+    /*std::unique_ptr<ArrayList<Player>> tableList = make_unique<ArrayList<Player>>();*/
+    std::unique_ptr<LinkedList<Player>> tableList = make_unique<LinkedList<Player>>();
+    /*std::unique_ptr<List<Player>> tableList = makeList<Player>();*/
     std::cout << "New Table Scene:" << std::endl;
     tableList->addFront(new Player(0, "Ike"));
     tableList->addFront(new Player(1, "Aykan"));
@@ -44,7 +46,9 @@ int main() {
     std::cout << "Someone Leaves the Table aka deleteAnywhere(1):"<< std::endl;
     tableList->deleteAnywhere(1);
     tableList->print();
-    std::unique_ptr<List<Player>> otherTable = makeList<Player>();
+    /*std::unique_ptr<ArrayList<Player>> otherTable = make_unique<ArrayList<Player>>();*/
+    std::unique_ptr<List<Player>> otherTable = make_unique<LinkedList<Player>>();
+    /*std::unique_ptr<List<Player>> otherTable = makeList<Player>();*/
     std::cout << "Other Table:"<< std::endl;
     otherTable->addFront(new Player(5, "Acorn"));
     otherTable->addFront(new Player(6, "Acorniston"));
