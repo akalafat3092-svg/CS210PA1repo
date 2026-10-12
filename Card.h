@@ -4,7 +4,7 @@
 
 class Card {
 public:
-    Card(std::string& color, const std::string& rank)
+    Card(const std::string& color, const std::string& rank)
         : color_(color), rank_(rank) {}
 
     bool operator==(const Card& other) const {
